@@ -2,15 +2,11 @@ package model.database;
 
 import java.sql.SQLException;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-
-import model.pojo.Food;
 
 public class Database {
 
@@ -26,6 +22,49 @@ public class Database {
      */
     public Database() {
         session = getSessionFactory().openSession();
+
+        session.createSQLQuery("SELECT * from glucides").list();
+        System.out.println();
+
+        // // try {
+        // // executeSQLQuery("INSERT INTO \"glucides\" (\"aliment / produit\") VALUES ('987987')");
+        // String str = "INSERT INTO `glucides` (`FAMILLE D’ALIMENTS`, `sous famille alimentaire`, `sous
+        // famille alimentaire 2`, "
+        // + "`code produit`, `aliment / produit`, `Glucides`) VALUES ('viandes, j, poissons', 'viandes
+        // cuites', "
+        // + "'buf et ', 6310, 'Boeuf, queue, bouillie/cuite à" + new Date().getTime() + "', 'traces')";
+        //
+        // str.contains("`");
+        //
+        // // executeSQLQuery(new String(str.replaceAll("\n", "").replaceAll("`", "\"").replaceAll(":",
+        // // "-").getBytes(), "UTF-8"));
+        // // } catch (SQLException | UnsupportedEncodingException e) {
+        // // TODO Auto-generated catch block
+        // // e.printStackTrace();
+        // // }
+        //
+        // StringBuilder result = new StringBuilder("");
+        //
+        // ClassLoader classLoader = getClass().getClassLoader();
+        // File file = new File(classLoader.getResource("sql/model_dietetic_insert.sql").getFile());
+        //
+        // try (Scanner scanner = new Scanner(file)) {
+        // while (scanner.hasNextLine()) {
+        // String line = scanner.nextLine();
+        // result.append(line).append("\n");
+        // }
+        // scanner.close();
+        //
+        // String query = result.toString().replaceAll("\n", "").replaceAll("`", "\"").replaceAll(":",
+        // "-").replaceAll("\\(", "")
+        // .replaceAll("\\)", "").replaceAll("œ", "oe");
+        //
+        // query.contains("\\(");
+        //
+        // executeSQLQuery(query);
+        // } catch (IOException | SQLException e) {
+        // e.printStackTrace();
+        // }
     }
 
     /**
@@ -60,16 +99,16 @@ public class Database {
         session.createSQLQuery(requete).executeUpdate();
     }
 
-    public void createAvailableFood(Food food) {
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
-            session.save(food);
-            transaction.commit();
-        } catch (HibernateException e) {
-            transaction.rollback();
-        }
-    }
+    // public void createAvailableFood(Food food) {
+    // Transaction transaction = null;
+    // try {
+    // transaction = session.beginTransaction();
+    // session.save(food);
+    // transaction.commit();
+    // } catch (HibernateException e) {
+    // transaction.rollback();
+    // }
+    // }
 
     //
     // /**

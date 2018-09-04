@@ -22,8 +22,4 @@ public class DieteticBrotherModel {
         database = new Database();
         recipe = new Recipe(0, "My Recipe", new ArrayList<>());
     }
-
-    public void addAvailableFood(Food food) {
-        database.createAvailableFood(food);
-    }
 }

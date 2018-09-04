@@ -1,28 +1,15 @@
 package model.pojo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "food")
 public class Food {
 
-    @Id
-    @Column(name = "foodId")
     private int foodId;
 
-    @Column(name = "foodName")
     private String foodName;
 
-    @Column(name = "glucideAmount")
     private double glucideAmount;
 
-    @Column(name = "lipideAmount")
     private double lipideAmount;
 
-    @Column(name = "proteineAmount")
     private double proteineAmount;
 
     public Food(int foodId, String foodName, double glucideAmount, double lipideAmount, double proteineAmount) {
