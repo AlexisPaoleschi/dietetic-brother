@@ -6,26 +6,26 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "`glucides`")
+@Table(name = "glucide")
 public class Glucide {
 
-    @Column(name = "`FAMILLE D’ALIMENTS`")
+    @Column(name = "FAMILLE D'ALIMENTS")
     private String alimentFamily;
 
-    @Column(name = "`sous famille alimentaire`")
+    @Column(name = "sous famille alimentaire")
     private String alimentSubFamily;
 
-    @Column(name = "`sous famille alimentaire 2`")
+    @Column(name = "sous famille alimentaire 2")
     private String alimentSubFamily2;
 
-    @Column(name = "`code produit`")
+    @Column(name = "code produit")
     private Integer productCode;
 
     @Id
-    @Column(name = "`aliment / produit`")
+    @Column(name = "aliment / produit")
     private String alimentProduct;
 
-    @Column(name = "`Glucides (g/100g)`")
+    @Column(name = "Glucides (g/100g)")
     private String glucideAmount;
 
     public Glucide(
