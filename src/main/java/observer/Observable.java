@@ -3,6 +3,7 @@ package observer;
 import java.util.List;
 
 import model.pojo.Food;
+import model.pojo.Recipe;
 
 /**
  * Interface Observable du design pattern Observateur. <br>
@@ -29,4 +30,6 @@ public interface Observable {
     public void removeObserver();
 
     public void foodListChangeNotifyObserver(List<Food> foodList);
+
+    public void recipeChangeNotifyObserver(Recipe recipe);
 }

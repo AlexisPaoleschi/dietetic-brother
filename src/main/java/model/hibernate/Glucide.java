@@ -28,10 +28,10 @@ public class Glucide {
     @Column(name = "glucides_100g")
     private String glucideAmount;
 
-    public Glucide(){
-    	
+    public Glucide() {
+        super();
     }
-    
+
     public Glucide(
         String alimentFamily,
         String alimentSubFamily,

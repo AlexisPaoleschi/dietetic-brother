@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Table(name = "lipides")
 public class Lipide {
 
-	@Column(name = "familleAliments")
+    @Column(name = "familleAliments")
     private String alimentFamily;
 
     @Column(name = "sousFamilleAlimentaire_1")
@@ -28,10 +28,10 @@ public class Lipide {
     @Column(name = "lipides_100g")
     private String lipideAmount;
 
-    public Lipide(){
-    	
+    public Lipide() {
+        super();
     }
-    
+
     public Lipide(
         String alimentFamily,
         String alimentSubFamily,

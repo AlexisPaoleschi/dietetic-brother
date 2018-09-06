@@ -1,6 +1,6 @@
 package model.pojo;
 
-import java.util.List;
+import java.util.Map;
 
 public class Recipe {
 
@@ -8,13 +8,13 @@ public class Recipe {
 
     private String recipeName;
 
-    private List<Food> foodList;
+    private Map<Food, Integer> foodMap;
 
-    public Recipe(int recipeId, String recipeName, List<Food> foodList) {
+    public Recipe(int recipeId, String recipeName, Map<Food, Integer> foodMap) {
         super();
         this.recipeId = recipeId;
         this.recipeName = recipeName;
-        this.foodList = foodList;
+        this.foodMap = foodMap;
     }
 
     /**
@@ -54,22 +54,21 @@ public class Recipe {
     }
 
     /**
-     * Gets the value of foodList.
+     * Gets the value of foodMap.
      *
-     * @return the value of foodList
+     * @return the value of foodMap
      */
-    public List<Food> getFoodList() {
-        return foodList;
+    public Map<Food, Integer> getFoodMap() {
+        return foodMap;
     }
 
     /**
-     * Sets the value of foodList.
+     * Sets the value of foodMap.
      *
-     * @param foodList the value to set
+     * @param foodMap the value to set
      */
-    public void setFoodList(List<Food> foodList) {
-        this.foodList = foodList;
+    public void setFoodMap(Map<Food, Integer> foodMap) {
+        this.foodMap = foodMap;
     }
- 
 
 }

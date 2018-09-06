@@ -1,24 +1,24 @@
 package model.pojo;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class Food {
 
-    private int foodId;
-
-    private String foodName;
-
-    private double glucideAmount;
-
-    private double lipideAmount;
-
-    private double proteineAmount;
+    private final SimpleIntegerProperty foodId = new SimpleIntegerProperty(this, "foodId", -1);
+    private final SimpleStringProperty foodName = new SimpleStringProperty(this, "foodName", "");
+    private final SimpleDoubleProperty glucideAmount = new SimpleDoubleProperty(this, "glucideAmount", 0.0);
+    private final SimpleDoubleProperty lipideAmount = new SimpleDoubleProperty(this, "lipideAmount", 0.0);
+    private final SimpleDoubleProperty proteineAmount = new SimpleDoubleProperty(this, "proteineAmount", 0.0);
 
     public Food(int foodId, String foodName, double glucideAmount, double lipideAmount, double proteineAmount) {
         super();
-        this.foodId = foodId;
-        this.foodName = foodName;
-        this.glucideAmount = glucideAmount;
-        this.lipideAmount = lipideAmount;
-        this.proteineAmount = proteineAmount;
+        this.foodId.set(foodId);
+        this.foodName.set(foodName);
+        this.glucideAmount.set(glucideAmount);
+        this.lipideAmount.set(lipideAmount);
+        this.proteineAmount.set(proteineAmount);
     }
 
     /**
@@ -27,7 +27,7 @@ public class Food {
      * @return the value of foodId
      */
     public int getFoodId() {
-        return foodId;
+        return foodId.get();
     }
 
     /**
@@ -36,7 +36,7 @@ public class Food {
      * @param foodId the value to set
      */
     public void setFoodId(int foodId) {
-        this.foodId = foodId;
+        this.foodId.set(foodId);
     }
 
     /**
@@ -45,7 +45,7 @@ public class Food {
      * @return the value of foodName
      */
     public String getFoodName() {
-        return foodName;
+        return foodName.get();
     }
 
     /**
@@ -54,7 +54,7 @@ public class Food {
      * @param foodName the value to set
      */
     public void setFoodName(String foodName) {
-        this.foodName = foodName;
+        this.foodName.set(foodName);
     }
 
     /**
@@ -63,7 +63,7 @@ public class Food {
      * @return the value of glucideAmount
      */
     public double getGlucideAmount() {
-        return glucideAmount;
+        return glucideAmount.get();
     }
 
     /**
@@ -72,7 +72,7 @@ public class Food {
      * @param glucideAmount the value to set
      */
     public void setGlucideAmount(double glucideAmount) {
-        this.glucideAmount = glucideAmount;
+        this.glucideAmount.set(glucideAmount);
     }
 
     /**
@@ -81,7 +81,7 @@ public class Food {
      * @return the value of lipideAmount
      */
     public double getLipideAmount() {
-        return lipideAmount;
+        return lipideAmount.get();
     }
 
     /**
@@ -90,7 +90,7 @@ public class Food {
      * @param lipideAmount the value to set
      */
     public void setLipideAmount(double lipideAmount) {
-        this.lipideAmount = lipideAmount;
+        this.lipideAmount.set(lipideAmount);
     }
 
     /**
@@ -99,7 +99,7 @@ public class Food {
      * @return the value of proteineAmount
      */
     public double getProteineAmount() {
-        return proteineAmount;
+        return proteineAmount.get();
     }
 
     /**
@@ -108,7 +108,7 @@ public class Food {
      * @param proteineAmount the value to set
      */
     public void setProteineAmount(double proteineAmount) {
-        this.proteineAmount = proteineAmount;
+        this.proteineAmount.set(proteineAmount);
     }
 
 }
