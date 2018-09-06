@@ -1,5 +1,6 @@
 package launcher;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -7,9 +8,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.mapping.Array;
 import org.hibernate.service.ServiceRegistry;
 
 import model.hibernate.Glucide;
+import model.hibernate.Lipide;
+import model.hibernate.Proteine;
+import model.pojo.Food;
+import model.pojo.Recipe;
+import utils.Utils;
 
 public class DieteticBrotherMain {
 
@@ -26,12 +33,37 @@ public class DieteticBrotherMain {
 			// Create session with connection to database
 			sessionObj = buildSessionFactory().openSession();
 			
-			Query query = sessionObj.createQuery("FROM Glucide");
-			List<Glucide> lstGlu = query.list();
-			lstGlu.forEach(g ->{
-				Glucide glu = g;
-				System.out.println(glu.getGlucideAmount());
+			// Retrieve all Food from database
+			Query queryGlu = sessionObj.createQuery("FROM Glucide");
+			Query queryLip = sessionObj.createQuery("FROM Lipide");
+			Query queryPro = sessionObj.createQuery("FROM Proteine");
+			
+			List<Glucide> lstGlu = queryGlu.list();
+			List<Lipide> lstLip = queryLip.list();
+			List<Proteine> lstPro = queryPro.list();
+			
+			List<Food> lstFood = new ArrayList<>();
+			
+			lstGlu.forEach(g -> {
+				int foodId = g.getProductCode();
+				String foodName = g.getAlimentProduct();
+				double gluAmount = Utils.parseStringWithcomaToDouble(g.getGlucideAmount());
+				double lipAmount = 0;
+				double proAmount = 0;
+				Food food = new Food(foodId, foodName, gluAmount, lipAmount, proAmount);
+				lstLip.forEach(l ->{
+					if(l.getProductCode() == foodId){
+						food.setLipideAmount(Utils.parseStringWithcomaToDouble(l.getLipideAmount()));
+					}
+				});
+				lstPro.forEach(p ->{
+					if(p.getProductCode() == foodId){
+						food.setProteineAmount(Utils.parseStringWithcomaToDouble(p.getProteineAmount()));
+					}
+				});
+				lstFood.add(food);
 			});
+
 			
 			sessionObj.beginTransaction();
 

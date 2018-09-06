@@ -70,5 +70,6 @@ public class Recipe {
     public void setFoodList(List<Food> foodList) {
         this.foodList = foodList;
     }
+ 
 
 }
