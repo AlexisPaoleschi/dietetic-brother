@@ -33,12 +33,12 @@ public class Glucide {
     }
 
     public Glucide(
-        String alimentFamily,
-        String alimentSubFamily,
-        String alimentSubFamily2,
-        Integer productCode,
-        String alimentProduct,
-        String glucideAmount) {
+            String alimentFamily,
+            String alimentSubFamily,
+            String alimentSubFamily2,
+            Integer productCode,
+            String alimentProduct,
+            String glucideAmount) {
         super();
         this.alimentFamily = alimentFamily;
         this.alimentSubFamily = alimentSubFamily;

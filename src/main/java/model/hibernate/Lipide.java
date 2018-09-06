@@ -33,12 +33,12 @@ public class Lipide {
     }
 
     public Lipide(
-        String alimentFamily,
-        String alimentSubFamily,
-        String alimentSubFamily2,
-        Integer productCode,
-        String alimentProduct,
-        String lipideAmount) {
+            String alimentFamily,
+            String alimentSubFamily,
+            String alimentSubFamily2,
+            Integer productCode,
+            String alimentProduct,
+            String lipideAmount) {
         super();
         this.alimentFamily = alimentFamily;
         this.alimentSubFamily = alimentSubFamily;

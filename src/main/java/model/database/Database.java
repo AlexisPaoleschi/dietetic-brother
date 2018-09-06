@@ -30,25 +30,25 @@ public class Database {
     public List<Food> initializeAvailableFood() {
         List<Food> availableFood = new ArrayList<>();
 
-        List<Glucide> lstGlu = session.createQuery("FROM Glucide").list();
-        List<Lipide> lstLip = session.createQuery("FROM Lipide").list();
-        List<Proteine> lstPro = session.createQuery("FROM Proteine").list();
+        List<Glucide> glucidesList = session.createQuery("FROM Glucide").list();
+        List<Lipide> lipidesList = session.createQuery("FROM Lipide").list();
+        List<Proteine> proteinesList = session.createQuery("FROM Proteine").list();
 
-        for (Glucide g : lstGlu) {
+        for (Glucide g : glucidesList) {
             int foodId = g.getProductCode();
             String foodName = g.getAlimentProduct();
-            double gluAmount = Utils.parseStringWithcomaToDouble(g.getGlucideAmount());
+            double gluAmount = Utils.parseStringWithComaToDouble(g.getGlucideAmount());
             double lipAmount = 0;
             double proAmount = 0;
             Food food = new Food(foodId, foodName, gluAmount, lipAmount, proAmount);
-            lstLip.forEach(l -> {
+            lipidesList.forEach(l -> {
                 if (l.getProductCode() == foodId) {
-                    food.setLipideAmount(Utils.parseStringWithcomaToDouble(l.getLipideAmount()));
+                    food.setLipideAmountFor100g(Utils.parseStringWithComaToDouble(l.getLipideAmount()));
                 }
             });
-            lstPro.forEach(p -> {
+            proteinesList.forEach(p -> {
                 if (p.getProductCode() == foodId) {
-                    food.setProteineAmount(Utils.parseStringWithcomaToDouble(p.getProteineAmount()));
+                    food.setProteineAmountFor100g(Utils.parseStringWithComaToDouble(p.getProteineAmount()));
                 }
             });
             availableFood.add(food);
@@ -62,7 +62,7 @@ public class Database {
      *
      * @return SessionFactory d'Hibernate
      */
-    public SessionFactory getSessionFactory() {
+    private SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
             final ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
@@ -83,9 +83,8 @@ public class Database {
      * Méthode d'exécution d'une requête SQL par Hibernate.
      *
      * @param requete : la requête SQL
-     * @throws SQLException : exception SQL si la requête est erronée
      */
-    public void executeSQLQuery(String requete) throws SQLException {
+    public void executeSQLQuery(String requete) {
         session.createSQLQuery(requete).executeUpdate();
     }
 

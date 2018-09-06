@@ -8,17 +8,22 @@ public class Food {
 
     private final SimpleIntegerProperty foodId = new SimpleIntegerProperty(this, "foodId", -1);
     private final SimpleStringProperty foodName = new SimpleStringProperty(this, "foodName", "");
+
+    private final SimpleDoubleProperty glucideAmountFor100g = new SimpleDoubleProperty(this, "glucideAmountFor100g", 0.0);
+    private final SimpleDoubleProperty lipideAmountFor100g = new SimpleDoubleProperty(this, "lipideAmountFor100g", 0.0);
+    private final SimpleDoubleProperty proteineAmountFor100g = new SimpleDoubleProperty(this, "proteineAmountFor100g", 0.0);
+
     private final SimpleDoubleProperty glucideAmount = new SimpleDoubleProperty(this, "glucideAmount", 0.0);
     private final SimpleDoubleProperty lipideAmount = new SimpleDoubleProperty(this, "lipideAmount", 0.0);
     private final SimpleDoubleProperty proteineAmount = new SimpleDoubleProperty(this, "proteineAmount", 0.0);
 
-    public Food(int foodId, String foodName, double glucideAmount, double lipideAmount, double proteineAmount) {
+    public Food(int foodId, String foodName, double glucideAmountFor100g, double lipideAmountFor100g, double proteineAmountFor100g) {
         super();
         this.foodId.set(foodId);
         this.foodName.set(foodName);
-        this.glucideAmount.set(glucideAmount);
-        this.lipideAmount.set(lipideAmount);
-        this.proteineAmount.set(proteineAmount);
+        this.glucideAmountFor100g.set(glucideAmountFor100g);
+        this.lipideAmountFor100g.set(lipideAmountFor100g);
+        this.proteineAmountFor100g.set(proteineAmountFor100g);
     }
 
     /**
@@ -55,6 +60,42 @@ public class Food {
      */
     public void setFoodName(String foodName) {
         this.foodName.set(foodName);
+    }
+
+    public double getGlucideAmountFor100g() {
+        return glucideAmountFor100g.get();
+    }
+
+    public SimpleDoubleProperty glucideAmountFor100gProperty() {
+        return glucideAmountFor100g;
+    }
+
+    public void setGlucideAmountFor100g(double glucideAmountFor100g) {
+        this.glucideAmountFor100g.set(glucideAmountFor100g);
+    }
+
+    public double getLipideAmountFor100g() {
+        return lipideAmountFor100g.get();
+    }
+
+    public SimpleDoubleProperty lipideAmountFor100gProperty() {
+        return lipideAmountFor100g;
+    }
+
+    public void setLipideAmountFor100g(double lipideAmountFor100g) {
+        this.lipideAmountFor100g.set(lipideAmountFor100g);
+    }
+
+    public double getProteineAmountFor100g() {
+        return proteineAmountFor100g.get();
+    }
+
+    public SimpleDoubleProperty proteineAmountFor100gProperty() {
+        return proteineAmountFor100g;
+    }
+
+    public void setProteineAmountFor100g(double proteineAmountFor100g) {
+        this.proteineAmountFor100g.set(proteineAmountFor100g);
     }
 
     /**
@@ -110,5 +151,4 @@ public class Food {
     public void setProteineAmount(double proteineAmount) {
         this.proteineAmount.set(proteineAmount);
     }
-
 }

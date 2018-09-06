@@ -13,23 +13,23 @@ import model.pojo.Food;
 
 public class DeleteButtonCell extends TableCell<Food, Boolean> {
 
-    private final HBox hBox = new HBox();
-    private final int tableIconImageSize = 16;
+    private HBox hBox = new HBox();
+    private int tableIconImageSize = 16;
 
-    public DeleteButtonCell() {
+    protected DeleteButtonCell() {
         hBox.setAlignment(Pos.CENTER);
         hBox.setSpacing(10);
 
-        ImageView addImageView = new ImageView(new Image("icon/delete.png"));
-        addImageView.setFitHeight(tableIconImageSize);
-        addImageView.setFitWidth(tableIconImageSize);
+        ImageView deleteImageView = new ImageView(new Image("icon/delete.png"));
+        deleteImageView.setFitHeight(tableIconImageSize);
+        deleteImageView.setFitWidth(tableIconImageSize);
 
-        Button addButton = new Button("");
-        addButton.setGraphic(addImageView);
-        addButton.setPrefSize(25, 30);
-        addButton.setTooltip(new Tooltip("Supprimer l'aliment de la recette"));
-        addButton.setOnAction(event -> RecipeController.getInstance().deleteFoodFromRecipe((Food) getTableRow().getItem()));
-        hBox.getChildren().add(addButton);
+        Button deleteButton = new Button("");
+        deleteButton.setGraphic(deleteImageView);
+        deleteButton.setPrefSize(25, 25);
+        deleteButton.setTooltip(new Tooltip("Supprimer l'aliment de la recette"));
+        deleteButton.setOnAction(event -> RecipeController.getInstance().deleteFoodFromRecipe((Food) getTableRow().getItem()));
+        hBox.getChildren().add(deleteButton);
     }
 
     /**

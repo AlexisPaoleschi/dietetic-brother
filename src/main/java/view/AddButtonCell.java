@@ -13,10 +13,10 @@ import model.pojo.Food;
 
 public class AddButtonCell extends TableCell<Food, Boolean> {
 
-    private final HBox hBox = new HBox();
-    private final int tableIconImageSize = 16;
+    private HBox hBox = new HBox();
+    private int tableIconImageSize = 16;
 
-    public AddButtonCell() {
+    protected AddButtonCell() {
         hBox.setAlignment(Pos.CENTER);
         hBox.setSpacing(10);
 
@@ -26,7 +26,7 @@ public class AddButtonCell extends TableCell<Food, Boolean> {
 
         Button addButton = new Button("");
         addButton.setGraphic(addImageView);
-        addButton.setPrefSize(25, 30);
+        addButton.setPrefSize(25, 25);
         addButton.setTooltip(new Tooltip("Ajouter l'aliment à la recette"));
         addButton.setOnAction(event -> RecipeController.getInstance().addFoodToRecipe((Food) getTableRow().getItem()));
         hBox.getChildren().add(addButton);

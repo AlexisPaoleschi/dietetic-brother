@@ -10,9 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.DieteticBrotherModel;
@@ -36,6 +34,9 @@ public class DieteticBrotherView extends Stage implements Observer {
             this.setResizable(true);
 
             this.fxmlURL = getClass().getClassLoader().getResource("fxml/dietetic-brother.fxml");
+            if (fxmlURL == null) {
+                System.exit(0);
+            }
             this.root = FXMLLoader.load(this.fxmlURL);
 
             this.scene = new Scene(this.root);
@@ -50,26 +51,24 @@ public class DieteticBrotherView extends Stage implements Observer {
 
             this.initializeView();
             this.model.updateAll();
-        } catch (final IOException e) {
-            e.printStackTrace();
-        } catch (final NullPointerException e) {
+        } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         }
     }
 
     @SuppressWarnings("unchecked")
-    public void initializeView() {
+    private void initializeView() {
         /* Champ de recherche */
         TextField searchTextField = (TextField) root.lookup("#searchTextField");
-        searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            RecipeController.getInstance().searchTextFieldModified(newValue);
-        });
+        searchTextField.textProperty().addListener((observable, oldValue, newValue) -> RecipeController.getInstance().searchTextFieldModified(newValue));
 
         /* Table des aliments disponibles */
         TableView<Food> availableFoodTableview = (TableView<Food>) root.lookup("#availableFoodTableview");
 
         TableColumn<Food, String> availableFoodNameColumn = new TableColumn<>("Aliment");
-        availableFoodNameColumn.setCellValueFactory(new PropertyValueFactory<Food, String>("foodName"));
+        availableFoodNameColumn.setMinWidth(100);
+        availableFoodNameColumn.setCellValueFactory(new PropertyValueFactory<>("foodName"));
+        availableFoodNameColumn.setStyle("-fx-alignment: CENTER-LEFT;");
 
         TableColumn<Food, Boolean> availableFoodAddColumn = new TableColumn<>("Ajouter");
         availableFoodAddColumn.setSortable(false);
@@ -82,33 +81,40 @@ public class DieteticBrotherView extends Stage implements Observer {
         TableView<Food> myRecipeTableview = (TableView<Food>) root.lookup("#myRecipeTableview");
 
         TableColumn<Food, String> myRecipeFoodNameColumn = new TableColumn<>("Aliment");
-        myRecipeFoodNameColumn.setCellValueFactory(new PropertyValueFactory<Food, String>("foodName"));
+        myRecipeFoodNameColumn.setMinWidth(150);
+        myRecipeFoodNameColumn.setCellValueFactory(new PropertyValueFactory<>("foodName"));
+        myRecipeFoodNameColumn.setStyle("-fx-alignment: CENTER-LEFT;");
 
-        TableColumn<Food, String> myRecipeProteineColumn = new TableColumn<>("Protéine");
-        myRecipeProteineColumn.setCellValueFactory(new PropertyValueFactory<Food, String>("proteineAmount"));
+        TableColumn<Food, Double> myRecipeProteineColumn = new TableColumn<>("Protéine");
+        myRecipeProteineColumn.setCellValueFactory(new PropertyValueFactory<>("proteineAmount"));
+        myRecipeProteineColumn.setStyle("-fx-alignment: CENTER-LEFT;");
 
-        TableColumn<Food, String> myRecipeGlucideColumn = new TableColumn<>("Glucide");
-        myRecipeGlucideColumn.setCellValueFactory(new PropertyValueFactory<Food, String>("glucideAmount"));
+        TableColumn<Food, Double> myRecipeGlucideColumn = new TableColumn<>("Glucide");
+        myRecipeGlucideColumn.setCellValueFactory(new PropertyValueFactory<>("glucideAmount"));
+        myRecipeGlucideColumn.setStyle("-fx-alignment: CENTER-LEFT;");
 
-        TableColumn<Food, String> myRecipeLipideColumn = new TableColumn<>("Lipide");
-        myRecipeLipideColumn.setCellValueFactory(new PropertyValueFactory<Food, String>("lipideAmount"));
+        TableColumn<Food, Double> myRecipeLipideColumn = new TableColumn<>("Lipide");
+        myRecipeLipideColumn.setCellValueFactory(new PropertyValueFactory<>("lipideAmount"));
+        myRecipeLipideColumn.setStyle("-fx-alignment: CENTER-LEFT;");
 
         TableColumn<Food, Boolean> myRecipeQuantityColumn = new TableColumn<>("Quantité");
+        myRecipeQuantityColumn.setMinWidth(150);
         myRecipeQuantityColumn.setSortable(false);
-        myRecipeQuantityColumn.setCellValueFactory(features -> new SimpleBooleanProperty(features.getValue() != null));
-        myRecipeQuantityColumn.setCellFactory(food -> new QuantitySpinnerCell(model));
+        myRecipeQuantityColumn.setCellValueFactory(food -> new SimpleBooleanProperty(food.getValue() != null));
+        myRecipeQuantityColumn.setCellFactory(food -> new QuantityCell(model, myRecipeTableview));
 
         TableColumn<Food, Boolean> myRecipeDeleteFoodColumn = new TableColumn<>("Supprimer");
+        myRecipeQuantityColumn.setMinWidth(100);
         myRecipeDeleteFoodColumn.setSortable(false);
-        myRecipeDeleteFoodColumn.setCellValueFactory(features -> new SimpleBooleanProperty(features.getValue() != null));
+        myRecipeDeleteFoodColumn.setCellValueFactory(food -> new SimpleBooleanProperty(food.getValue() != null));
         myRecipeDeleteFoodColumn.setCellFactory(food -> new DeleteButtonCell());
 
         myRecipeTableview.getColumns().setAll(myRecipeFoodNameColumn,
-                                              myRecipeProteineColumn,
-                                              myRecipeGlucideColumn,
-                                              myRecipeLipideColumn,
-                                              myRecipeQuantityColumn,
-                                              myRecipeDeleteFoodColumn);
+                myRecipeProteineColumn,
+                myRecipeGlucideColumn,
+                myRecipeLipideColumn,
+                myRecipeQuantityColumn,
+                myRecipeDeleteFoodColumn);
     }
 
     @SuppressWarnings("unchecked")
@@ -123,6 +129,7 @@ public class DieteticBrotherView extends Stage implements Observer {
     public void updateRecipe(Recipe recipe) {
         TableView<Food> myRecipeTableview = (TableView<Food>) root.lookup("#myRecipeTableview");
         myRecipeTableview.setItems(FXCollections.observableArrayList(recipe.getFoodMap().keySet()));
+        myRecipeTableview.refresh();
     }
 
 }
