@@ -37,7 +37,7 @@ public class QuantitySpinnerCell extends TableCell<Food, Boolean> {
         quantitySpinnerFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(min, max, initialValue, amountToStepBy);
         quantitySpinner = new Spinner<>();
         quantitySpinner.setValueFactory(quantitySpinnerFactory);
-        quantitySpinner.getEditor().textProperty().addListener((ChangeListener<String>) (observable, oldValue, newValue) -> {
+        quantitySpinner.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
             String value = "";
             for (final Character character : newValue.toCharArray()) {
                 if (Character.isDigit(character)) {
@@ -51,6 +51,8 @@ public class QuantitySpinnerCell extends TableCell<Food, Boolean> {
             quantitySpinnerFactory.setValue(Integer.valueOf(value));
         });
 
+//        quantitySpinner.valueProperty().addListener((ChangeListener<Integer>) (observable, oldValue, newValue) -> updateAmounts(newValue));
+
         hBox.getChildren().add(quantitySpinner);
     }
 
@@ -63,7 +65,7 @@ public class QuantitySpinnerCell extends TableCell<Food, Boolean> {
         if (!empty) {
             Food food = (Food) getTableRow().getItem();
             for (Food currentFood : model.getRecipe().getFoodMap().keySet()) {
-                if (currentFood.getFoodId() == food.getFoodId()) {
+                if (food != null && currentFood.getFoodId() == food.getFoodId()) {
                     quantitySpinner.getEditor().setText(Integer.toString(model.getRecipe().getFoodMap().get(currentFood)));
                     quantitySpinnerFactory.setValue(model.getRecipe().getFoodMap().get(currentFood));
                 }
