@@ -28,6 +28,10 @@ public class DieteticBrotherMain {
 			
 			Query query = sessionObj.createQuery("FROM Glucide");
 			List<Glucide> lstGlu = query.list();
+			lstGlu.forEach(g ->{
+				Glucide glu = g;
+				System.out.println(glu.getGlucideAmount());
+			});
 			
 			sessionObj.beginTransaction();
 
