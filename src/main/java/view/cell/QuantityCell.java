@@ -1,4 +1,4 @@
-package view;
+package view.cell;
 
 import controller.RecipeController;
 import javafx.geometry.Pos;
@@ -16,10 +16,10 @@ public class QuantityCell extends TableCell<Food, Boolean> {
     private DieteticBrotherModel model;
     private HBox hBox = new HBox();
     private Label quantityLabel;
-    private static final int quantityStep1 = 1;
-    private static final int quantityStep25 = 25;
+    private static final int QUANTITY_STEP_1 = 1;
+    private static final int QUANTITY_STEP_25 = 25;
 
-    protected QuantityCell(DieteticBrotherModel model) {
+    public QuantityCell(DieteticBrotherModel model) {
         this.model = model;
 
         hBox.setAlignment(Pos.CENTER);
@@ -31,25 +31,25 @@ public class QuantityCell extends TableCell<Food, Boolean> {
         add1Button.setTooltip(new Tooltip("Ajouter 1 gramme à cet aliment"));
         add1Button.setOnAction(event -> RecipeController.getInstance()
                 .updateFoodQuantity((Food) getTableRow().getItem(),
-                                    this.model.getRecipe().getFoodMap().get(getTableRow().getItem()) + quantityStep1));
+                                    this.model.getRecipe().getFoodMap().get(getTableRow().getItem()) + QUANTITY_STEP_1));
 
         Button add25Button = new Button("+25");
         add25Button.setTooltip(new Tooltip("Ajouter 25 grammes à cet aliment"));
         add25Button.setOnAction(event -> RecipeController.getInstance()
                 .updateFoodQuantity((Food) getTableRow().getItem(),
-                                    this.model.getRecipe().getFoodMap().get(getTableRow().getItem()) + quantityStep25));
+                                    this.model.getRecipe().getFoodMap().get(getTableRow().getItem()) + QUANTITY_STEP_25));
 
         Button remove1Button = new Button("-1");
         remove1Button.setTooltip(new Tooltip("Enlever 1 gramme à cet aliment"));
         remove1Button.setOnAction(event -> RecipeController.getInstance()
                 .updateFoodQuantity((Food) getTableRow().getItem(),
-                                    this.model.getRecipe().getFoodMap().get(getTableRow().getItem()) - quantityStep1));
+                                    this.model.getRecipe().getFoodMap().get(getTableRow().getItem()) - QUANTITY_STEP_1));
 
         Button remove25Button = new Button("-25");
         remove25Button.setTooltip(new Tooltip("Enlever 25 grammes à cet aliment"));
         remove25Button.setOnAction(event -> RecipeController.getInstance()
                 .updateFoodQuantity((Food) getTableRow().getItem(),
-                                    this.model.getRecipe().getFoodMap().get(getTableRow().getItem()) - quantityStep25));
+                                    this.model.getRecipe().getFoodMap().get(getTableRow().getItem()) - QUANTITY_STEP_25));
 
         hBox.getChildren().addAll(quantityLabel, add1Button, add25Button, remove1Button, remove25Button);
     }

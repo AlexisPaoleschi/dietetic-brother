@@ -23,6 +23,9 @@ import model.pojo.Food;
 import model.pojo.Recipe;
 import observer.Observer;
 import utils.Utils;
+import view.cell.AddButtonCell;
+import view.cell.DeleteButtonCell;
+import view.cell.QuantityCell;
 
 public class DieteticBrotherView extends Stage implements Observer {
 
@@ -30,9 +33,9 @@ public class DieteticBrotherView extends Stage implements Observer {
     private Scene scene;
     private DieteticBrotherModel model;
     private URL fxmlURL;
-    private static final int proteineToCal = 4;
-    private static final int glucideToCal = 4;
-    private static final int lipideToCal = 9;
+    private static final int PROTEINE_TO_CAL = 4;
+    private static final int GLUCIDE_TO_CAL = 4;
+    private static final int LIPIDE_TO_CAL = 9;
 
     public DieteticBrotherView(DieteticBrotherModel model) {
         super();
@@ -162,9 +165,9 @@ public class DieteticBrotherView extends Stage implements Observer {
             percentLipide = new Double(Utils.round(lipideTotal / total * 100, 0)).intValue();
         }
 
-        double proteinesKcal = Utils.round(proteineTotal * proteineToCal, 3);
-        double glucidesKcal = Utils.round(glucideTotal * glucideToCal, 3);
-        double lipidesKcal = Utils.round(lipideTotal * lipideToCal, 3);
+        double proteinesKcal = Utils.round(proteineTotal * PROTEINE_TO_CAL, 3);
+        double glucidesKcal = Utils.round(glucideTotal * GLUCIDE_TO_CAL, 3);
+        double lipidesKcal = Utils.round(lipideTotal * LIPIDE_TO_CAL, 3);
         Label totalProteinesLabel = (Label) root.lookup("#totalProteinesLabel");
         totalProteinesLabel.setTextAlignment(TextAlignment.CENTER);
         totalProteinesLabel.setText("Protéines\n" + Utils.round(proteineTotal, 1) + "g\n" + proteinesKcal + "kcal\n" + percentProteine + "%");
@@ -176,7 +179,7 @@ public class DieteticBrotherView extends Stage implements Observer {
         totalLipidesLabel.setText("Lipides\n" + Utils.round(lipideTotal, 1) + "g\n" + lipidesKcal + "kcal\n" + percentLipide + "%");
         Label totalKcalLabel = (Label) root.lookup("#totalKcalLabel");
         totalKcalLabel.setTextAlignment(TextAlignment.CENTER);
-        totalKcalLabel.setText("Total\n" + String.valueOf(Utils.round(proteinesKcal + glucidesKcal + lipidesKcal, 1)) + "kcal\n");
+        totalKcalLabel.setText("Total\n" + Utils.round(proteinesKcal + glucidesKcal + lipidesKcal, 1) + "kcal\n");
     }
 
 }

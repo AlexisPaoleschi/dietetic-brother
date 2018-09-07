@@ -1,4 +1,4 @@
-package view;
+package view.cell;
 
 import controller.RecipeController;
 import javafx.geometry.Pos;
@@ -14,15 +14,15 @@ import model.pojo.Food;
 public class AddButtonCell extends TableCell<Food, Boolean> {
 
     private HBox hBox = new HBox();
-    private static final int tableIconImageSize = 25;
+    private static final int TABLE_ICON_IMAGE_SIZE = 25;
 
-    protected AddButtonCell() {
+    public AddButtonCell() {
         hBox.setAlignment(Pos.CENTER);
         hBox.setSpacing(10);
 
         ImageView addImageView = new ImageView(new Image("icon/add.png"));
-        addImageView.setFitHeight(tableIconImageSize);
-        addImageView.setFitWidth(tableIconImageSize);
+        addImageView.setFitHeight(TABLE_ICON_IMAGE_SIZE);
+        addImageView.setFitWidth(TABLE_ICON_IMAGE_SIZE);
 
         Button addButton = new Button("");
         addButton.setGraphic(addImageView);

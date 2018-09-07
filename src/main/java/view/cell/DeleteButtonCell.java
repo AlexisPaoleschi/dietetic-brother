@@ -1,4 +1,4 @@
-package view;
+package view.cell;
 
 import controller.RecipeController;
 import javafx.geometry.Pos;
@@ -14,15 +14,15 @@ import model.pojo.Food;
 public class DeleteButtonCell extends TableCell<Food, Boolean> {
 
     private HBox hBox = new HBox();
-    private static final int tableIconImageSize = 25;
+    private static final int TABLE_ICON_IMAGE_SIZE = 25;
 
-    protected DeleteButtonCell() {
+    public DeleteButtonCell() {
         hBox.setAlignment(Pos.CENTER);
         hBox.setSpacing(10);
 
         ImageView deleteImageView = new ImageView(new Image("icon/delete.png"));
-        deleteImageView.setFitHeight(tableIconImageSize);
-        deleteImageView.setFitWidth(tableIconImageSize);
+        deleteImageView.setFitHeight(TABLE_ICON_IMAGE_SIZE);
+        deleteImageView.setFitWidth(TABLE_ICON_IMAGE_SIZE);
 
         Button deleteButton = new Button("");
         deleteButton.setGraphic(deleteImageView);
