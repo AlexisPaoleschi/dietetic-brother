@@ -85,7 +85,7 @@ public class DieteticBrotherView extends Stage implements Observer {
         myRecipeFoodNameColumn.setCellValueFactory(new PropertyValueFactory<>("foodName"));
         myRecipeFoodNameColumn.setStyle("-fx-alignment: CENTER-LEFT;");
 
-        TableColumn<Food, Double> myRecipeProteineColumn = new TableColumn<>("Prot√©ine");
+        TableColumn<Food, Double> myRecipeProteineColumn = new TableColumn<>("ProtÈine");
         myRecipeProteineColumn.setCellValueFactory(new PropertyValueFactory<>("proteineAmount"));
         myRecipeProteineColumn.setStyle("-fx-alignment: CENTER-LEFT;");
 
@@ -97,7 +97,7 @@ public class DieteticBrotherView extends Stage implements Observer {
         myRecipeLipideColumn.setCellValueFactory(new PropertyValueFactory<>("lipideAmount"));
         myRecipeLipideColumn.setStyle("-fx-alignment: CENTER-LEFT;");
 
-        TableColumn<Food, Boolean> myRecipeQuantityColumn = new TableColumn<>("Quantit√©");
+        TableColumn<Food, Boolean> myRecipeQuantityColumn = new TableColumn<>("QuantitÈ");
         myRecipeQuantityColumn.setMinWidth(150);
         myRecipeQuantityColumn.setSortable(false);
         myRecipeQuantityColumn.setCellValueFactory(food -> new SimpleBooleanProperty(food.getValue() != null));

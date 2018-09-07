@@ -35,8 +35,8 @@ public class QuantityCell extends TableCell<Food, Boolean> {
         Button addButton = new Button("");
         addButton.setGraphic(addImageView);
         addButton.setPrefSize(25, 25);
-        addButton.setTooltip(new Tooltip("Ajouter 5 grammes ├а cet aliment"));
-        addButton.setOnAction(event -> RecipeController.getInstance().updateFoodQuantity((Food) getTableRow().getItem(), model.getRecipe().getFoodMap().get(getTableRow().getItem()) + 5));
+        addButton.setTooltip(new Tooltip("Ajouter 5 grammes ра cet aliment"));
+        addButton.setOnAction(event -> RecipeController.getInstance().updateFoodQuantity((Food) getTableRow().getItem(), model.getRecipe().getFoodMap().get(getTableRow().getItem()) + 25));
 
         ImageView removeImageView = new ImageView(new Image("icon/remove.png"));
         removeImageView.setFitHeight(tableIconImageSize);
@@ -45,8 +45,8 @@ public class QuantityCell extends TableCell<Food, Boolean> {
         Button removeButton = new Button("");
         removeButton.setGraphic(removeImageView);
         removeButton.setPrefSize(25, 25);
-        removeButton.setTooltip(new Tooltip("Enlever 5 grammes ├а cet aliment"));
-        removeButton.setOnAction(event -> RecipeController.getInstance().updateFoodQuantity((Food) getTableRow().getItem(), model.getRecipe().getFoodMap().get(getTableRow().getItem()) - 5));
+        removeButton.setTooltip(new Tooltip("Enlever 5 grammes ра cet aliment"));
+        removeButton.setOnAction(event -> RecipeController.getInstance().updateFoodQuantity((Food) getTableRow().getItem(), model.getRecipe().getFoodMap().get(getTableRow().getItem()) - 25));
 
         hBox.getChildren().addAll(quantityLabel, addButton, removeButton);
     }

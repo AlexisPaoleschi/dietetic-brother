@@ -59,9 +59,9 @@ public class RecipeController {
     public void updateFoodQuantity(Food food, Integer quantity) {
         if (food != null && quantity >= 0) {
             Map<Food, Integer> foodMap = model.getRecipe().getFoodMap();
-            food.setProteineAmount(Utils.round(quantity * food.getProteineAmountFor100g() / 100, 3));
-            food.setGlucideAmount(Utils.round(quantity * food.getGlucideAmountFor100g() / 100, 3));
-            food.setLipideAmount(Utils.round(quantity * food.getLipideAmountFor100g() / 100, 3));
+            food.setProteineAmount(Utils.round(quantity * food.getProteineAmountFor100g() / 100, 1));
+            food.setGlucideAmount(Utils.round(quantity * food.getGlucideAmountFor100g() / 100, 1));
+            food.setLipideAmount(Utils.round(quantity * food.getLipideAmountFor100g() / 100, 1));
             foodMap.put(food, quantity);
             model.updateRecipe(foodMap);
         }
