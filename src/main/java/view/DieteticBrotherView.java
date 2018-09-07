@@ -92,7 +92,7 @@ public class DieteticBrotherView extends Stage implements Observer {
         TableView<Food> myRecipeTableview = (TableView<Food>) root.lookup("#myRecipeTableview");
 
         TableColumn<Food, String> myRecipeFoodNameColumn = new TableColumn<>("Aliment");
-        myRecipeFoodNameColumn.setMinWidth(150);
+        myRecipeFoodNameColumn.setMinWidth(100);
         myRecipeFoodNameColumn.setCellValueFactory(new PropertyValueFactory<>("foodName"));
         myRecipeFoodNameColumn.setStyle("-fx-alignment: CENTER-LEFT;");
 
@@ -109,13 +109,12 @@ public class DieteticBrotherView extends Stage implements Observer {
         myRecipeLipideColumn.setStyle("-fx-alignment: CENTER;");
 
         TableColumn<Food, Boolean> myRecipeQuantityColumn = new TableColumn<>("Quantité");
-        myRecipeQuantityColumn.setMinWidth(150);
+        myRecipeQuantityColumn.setMinWidth(200);
         myRecipeQuantityColumn.setSortable(false);
         myRecipeQuantityColumn.setCellValueFactory(food -> new SimpleBooleanProperty(food.getValue() != null));
         myRecipeQuantityColumn.setCellFactory(food -> new QuantityCell(model));
 
         TableColumn<Food, Boolean> myRecipeDeleteFoodColumn = new TableColumn<>("Supprimer");
-        myRecipeQuantityColumn.setMinWidth(100);
         myRecipeDeleteFoodColumn.setSortable(false);
         myRecipeDeleteFoodColumn.setCellValueFactory(food -> new SimpleBooleanProperty(food.getValue() != null));
         myRecipeDeleteFoodColumn.setCellFactory(food -> new DeleteButtonCell());

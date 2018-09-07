@@ -14,7 +14,7 @@ import model.pojo.Food;
 public class AddButtonCell extends TableCell<Food, Boolean> {
 
     private HBox hBox = new HBox();
-    private static final int tableIconImageSize = 16;
+    private static final int tableIconImageSize = 25;
 
     protected AddButtonCell() {
         hBox.setAlignment(Pos.CENTER);
