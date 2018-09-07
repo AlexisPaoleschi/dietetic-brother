@@ -30,9 +30,9 @@ public class DieteticBrotherView extends Stage implements Observer {
     private Scene scene;
     private DieteticBrotherModel model;
     private URL fxmlURL;
-    private static final int proteineToCal = 4;
-    private static final int glucideToCal = 9;
-    private static final int lipideToCal = 4;
+    private static final int proteineToCal = 4000;
+    private static final int glucideToCal = 4000;
+    private static final int lipideToCal = 9000;
 
     public DieteticBrotherView(DieteticBrotherModel model) {
         super();
@@ -174,6 +174,10 @@ public class DieteticBrotherView extends Stage implements Observer {
         totalLipidesLabel.setTextAlignment(TextAlignment.CENTER);
         totalLipidesLabel.setText("Lipides\n" + Utils.round(lipideTotal, 1) + "g\n" + Utils.round(lipideTotal * lipideToCal, 3) + "kcal\n"
                 + percentLipide + "%");
+        
+        Label totalKcalLabel = (Label) root.lookup("#totalKcalLabel");
+        totalKcalLabel.setTextAlignment(TextAlignment.CENTER);
+        totalKcalLabel.setText(String.valueOf(proteineToCal +  glucideToCal + lipideToCal) + "kcal\n");
     }
 
 }
