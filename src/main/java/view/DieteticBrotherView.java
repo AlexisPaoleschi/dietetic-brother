@@ -3,6 +3,7 @@ package view;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 
 import controller.RecipeController;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -10,19 +11,28 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import model.DieteticBrotherModel;
 import model.pojo.Food;
 import model.pojo.Recipe;
 import observer.Observer;
+import utils.Utils;
 
 public class DieteticBrotherView extends Stage implements Observer {
+
     private Parent root;
     private Scene scene;
     private DieteticBrotherModel model;
     private URL fxmlURL;
+    private static final int proteineToCal = 4;
+    private static final int glucideToCal = 9;
+    private static final int lipideToCal = 4;
 
     public DieteticBrotherView(DieteticBrotherModel model) {
         super();
@@ -60,7 +70,8 @@ public class DieteticBrotherView extends Stage implements Observer {
     private void initializeView() {
         /* Champ de recherche */
         TextField searchTextField = (TextField) root.lookup("#searchTextField");
-        searchTextField.textProperty().addListener((observable, oldValue, newValue) -> RecipeController.getInstance().searchTextFieldModified(newValue));
+        searchTextField.textProperty()
+                .addListener((observable, oldValue, newValue) -> RecipeController.getInstance().searchTextFieldModified(newValue));
 
         /* Table des aliments disponibles */
         TableView<Food> availableFoodTableview = (TableView<Food>) root.lookup("#availableFoodTableview");
@@ -85,23 +96,23 @@ public class DieteticBrotherView extends Stage implements Observer {
         myRecipeFoodNameColumn.setCellValueFactory(new PropertyValueFactory<>("foodName"));
         myRecipeFoodNameColumn.setStyle("-fx-alignment: CENTER-LEFT;");
 
-        TableColumn<Food, Double> myRecipeProteineColumn = new TableColumn<>("Protéine");
+        TableColumn<Food, Double> myRecipeProteineColumn = new TableColumn<>("ProtÃ©ine");
         myRecipeProteineColumn.setCellValueFactory(new PropertyValueFactory<>("proteineAmount"));
-        myRecipeProteineColumn.setStyle("-fx-alignment: CENTER-LEFT;");
+        myRecipeProteineColumn.setStyle("-fx-alignment: CENTER;");
 
         TableColumn<Food, Double> myRecipeGlucideColumn = new TableColumn<>("Glucide");
         myRecipeGlucideColumn.setCellValueFactory(new PropertyValueFactory<>("glucideAmount"));
-        myRecipeGlucideColumn.setStyle("-fx-alignment: CENTER-LEFT;");
+        myRecipeGlucideColumn.setStyle("-fx-alignment: CENTER;");
 
         TableColumn<Food, Double> myRecipeLipideColumn = new TableColumn<>("Lipide");
         myRecipeLipideColumn.setCellValueFactory(new PropertyValueFactory<>("lipideAmount"));
-        myRecipeLipideColumn.setStyle("-fx-alignment: CENTER-LEFT;");
+        myRecipeLipideColumn.setStyle("-fx-alignment: CENTER;");
 
-        TableColumn<Food, Boolean> myRecipeQuantityColumn = new TableColumn<>("Quantité");
+        TableColumn<Food, Boolean> myRecipeQuantityColumn = new TableColumn<>("QuantitÃ©");
         myRecipeQuantityColumn.setMinWidth(150);
         myRecipeQuantityColumn.setSortable(false);
         myRecipeQuantityColumn.setCellValueFactory(food -> new SimpleBooleanProperty(food.getValue() != null));
-        myRecipeQuantityColumn.setCellFactory(food -> new QuantityCell(model, myRecipeTableview));
+        myRecipeQuantityColumn.setCellFactory(food -> new QuantityCell(model));
 
         TableColumn<Food, Boolean> myRecipeDeleteFoodColumn = new TableColumn<>("Supprimer");
         myRecipeQuantityColumn.setMinWidth(100);
@@ -110,11 +121,11 @@ public class DieteticBrotherView extends Stage implements Observer {
         myRecipeDeleteFoodColumn.setCellFactory(food -> new DeleteButtonCell());
 
         myRecipeTableview.getColumns().setAll(myRecipeFoodNameColumn,
-                myRecipeProteineColumn,
-                myRecipeGlucideColumn,
-                myRecipeLipideColumn,
-                myRecipeQuantityColumn,
-                myRecipeDeleteFoodColumn);
+                                              myRecipeProteineColumn,
+                                              myRecipeGlucideColumn,
+                                              myRecipeLipideColumn,
+                                              myRecipeQuantityColumn,
+                                              myRecipeDeleteFoodColumn);
     }
 
     @SuppressWarnings("unchecked")
@@ -127,9 +138,43 @@ public class DieteticBrotherView extends Stage implements Observer {
     @SuppressWarnings("unchecked")
     @Override
     public void updateRecipe(Recipe recipe) {
+        Map<Food, Integer> foodMap = recipe.getFoodMap();
+
         TableView<Food> myRecipeTableview = (TableView<Food>) root.lookup("#myRecipeTableview");
-        myRecipeTableview.setItems(FXCollections.observableArrayList(recipe.getFoodMap().keySet()));
+        myRecipeTableview.setItems(FXCollections.observableArrayList(foodMap.keySet()));
         myRecipeTableview.refresh();
+
+        Double proteineTotal = 0.0;
+        Double glucideTotal = 0.0;
+        Double lipideTotal = 0.0;
+        for (Map.Entry<Food, Integer> food : foodMap.entrySet()) {
+            proteineTotal += food.getKey().getProteineAmount();
+            glucideTotal += food.getKey().getGlucideAmount();
+            lipideTotal += food.getKey().getLipideAmount();
+        }
+
+        Integer percentProteine = 0;
+        Integer percentGlucide = 0;
+        Integer percentLipide = 0;
+        Double total = proteineTotal + glucideTotal + lipideTotal;
+        if (total > 0) {
+            percentProteine = new Double(Utils.round(proteineTotal / total * 100, 0)).intValue();
+            percentGlucide = new Double(Utils.round(glucideTotal / total * 100, 0)).intValue();
+            percentLipide = new Double(Utils.round(lipideTotal / total * 100, 0)).intValue();
+        }
+
+        Label totalProteinesLabel = (Label) root.lookup("#totalProteinesLabel");
+        totalProteinesLabel.setTextAlignment(TextAlignment.CENTER);
+        totalProteinesLabel.setText("ProtÃ©ines\n" + Utils.round(proteineTotal, 1) + "g\n" + Utils.round(proteineTotal * proteineToCal, 3) + "kcal\n"
+                + percentProteine + "%");
+        Label totalGlucidesLabel = (Label) root.lookup("#totalGlucidesLabel");
+        totalGlucidesLabel.setTextAlignment(TextAlignment.CENTER);
+        totalGlucidesLabel.setText("Glucides\n" + Utils.round(glucideTotal, 1) + "g\n" + Utils.round(glucideTotal * glucideToCal, 3) + "kcal\n"
+                + percentGlucide + "%");
+        Label totalLipidesLabel = (Label) root.lookup("#totalLipidesLabel");
+        totalLipidesLabel.setTextAlignment(TextAlignment.CENTER);
+        totalLipidesLabel.setText("Lipides\n" + Utils.round(lipideTotal, 1) + "g\n" + Utils.round(lipideTotal * lipideToCal, 3) + "kcal\n"
+                + percentLipide + "%");
     }
 
 }

@@ -14,7 +14,7 @@ import model.pojo.Food;
 public class DeleteButtonCell extends TableCell<Food, Boolean> {
 
     private HBox hBox = new HBox();
-    private int tableIconImageSize = 16;
+    private static final int tableIconImageSize = 16;
 
     protected DeleteButtonCell() {
         hBox.setAlignment(Pos.CENTER);

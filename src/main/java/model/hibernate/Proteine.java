@@ -33,12 +33,12 @@ public class Proteine {
     }
 
     public Proteine(
-            String alimentFamily,
-            String alimentSubFamily,
-            String alimentSubFamily2,
-            Integer productCode,
-            String alimentProduct,
-            String proteineAmount) {
+        String alimentFamily,
+        String alimentSubFamily,
+        String alimentSubFamily2,
+        Integer productCode,
+        String alimentProduct,
+        String proteineAmount) {
         super();
         this.alimentFamily = alimentFamily;
         this.alimentSubFamily = alimentSubFamily;
