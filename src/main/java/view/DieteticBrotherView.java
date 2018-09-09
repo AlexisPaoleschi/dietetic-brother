@@ -158,16 +158,19 @@ public class DieteticBrotherView extends Stage implements Observer {
         Integer percentProteine = 0;
         Integer percentGlucide = 0;
         Integer percentLipide = 0;
-        Double total = proteineTotal + glucideTotal + lipideTotal;
-        if (total > 0) {
-            percentProteine = new Double(Utils.round(proteineTotal / total * 100, 0)).intValue();
-            percentGlucide = new Double(Utils.round(glucideTotal / total * 100, 0)).intValue();
-            percentLipide = new Double(Utils.round(lipideTotal / total * 100, 0)).intValue();
-        }
-
+        
         double proteinesKcal = Utils.round(proteineTotal * PROTEINE_TO_CAL, 3);
         double glucidesKcal = Utils.round(glucideTotal * GLUCIDE_TO_CAL, 3);
         double lipidesKcal = Utils.round(lipideTotal * LIPIDE_TO_CAL, 3);
+        
+        double totalKcal = proteinesKcal + glucidesKcal + lipidesKcal;
+        
+        if (totalKcal > 0) {
+            percentProteine = new Double(Utils.round(proteinesKcal / totalKcal * 100, 0)).intValue();
+            percentGlucide = new Double(Utils.round(lipidesKcal / totalKcal * 100, 0)).intValue();
+            percentLipide = new Double(Utils.round(lipidesKcal / totalKcal * 100, 0)).intValue();
+        }
+
         Label totalProteinesLabel = (Label) root.lookup("#totalProteinesLabel");
         totalProteinesLabel.setTextAlignment(TextAlignment.CENTER);
         totalProteinesLabel.setText("Protéines\n" + Utils.round(proteineTotal, 1) + "g\n" + proteinesKcal + "kcal\n" + percentProteine + "%");
