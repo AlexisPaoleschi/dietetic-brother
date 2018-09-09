@@ -166,9 +166,15 @@ public class DieteticBrotherView extends Stage implements Observer {
         double totalKcal = proteinesKcal + glucidesKcal + lipidesKcal;
         
         if (totalKcal > 0) {
+<<<<<<< HEAD
             percentProteine = new Double(Utils.round(proteinesKcal / totalKcal * 100, 0)).intValue();
             percentGlucide = new Double(Utils.round(lipidesKcal / totalKcal * 100, 0)).intValue();
             percentLipide = new Double(Utils.round(lipidesKcal / totalKcal * 100, 0)).intValue();
+=======
+            percentProteine = new Double(Utils.round(proteineTotal / totalKcal * 100, 0)).intValue();
+            percentGlucide = new Double(Utils.round(glucideTotal / totalKcal * 100, 0)).intValue();
+            percentLipide = new Double(Utils.round(lipideTotal / totalKcal * 100, 0)).intValue();
+>>>>>>> branch 'master' of https://github.com/AlexisPaoleschi/dietetic-brother.git
         }
 
         Label totalProteinesLabel = (Label) root.lookup("#totalProteinesLabel");
