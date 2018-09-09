@@ -167,7 +167,7 @@ public class DieteticBrotherView extends Stage implements Observer {
         
         if (totalKcal > 0) {
             percentProteine = new Double(Utils.round(proteinesKcal / totalKcal * 100, 0)).intValue();
-            percentGlucide = new Double(Utils.round(lipidesKcal / totalKcal * 100, 0)).intValue();
+            percentGlucide = new Double(Utils.round(glucidesKcal / totalKcal * 100, 0)).intValue();
             percentLipide = new Double(Utils.round(lipidesKcal / totalKcal * 100, 0)).intValue();
         }
 
