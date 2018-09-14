@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +16,8 @@ public class DieteticBrotherModel implements Observable {
 
     private List<Food> availableFood;
 
+    private List<Recipe> recipes;
+
     private Recipe recipe;
 
     private Database database;
@@ -27,8 +28,9 @@ public class DieteticBrotherModel implements Observable {
     public DieteticBrotherModel() {
         database = new Database();
         availableFood = database.initializeAvailableFood();
+        recipes = database.initializeRecipes(availableFood);
 
-        recipe = new Recipe(0, "My Recipe", new HashMap<>());
+        recipe = new Recipe(0, "My Recipe");
     }
 
     public void updateRecipe(Map<Food, Integer> foodList) {

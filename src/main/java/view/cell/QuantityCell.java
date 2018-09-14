@@ -29,9 +29,11 @@ public class QuantityCell extends TableCell<Food, Boolean> {
 
         Button add1Button = new Button("+1");
         add1Button.setTooltip(new Tooltip("Ajouter 1 gramme à cet aliment"));
-        add1Button.setOnAction(event -> RecipeController.getInstance()
-                .updateFoodQuantity((Food) getTableRow().getItem(),
-                                    this.model.getRecipe().getFoodMap().get(getTableRow().getItem()) + QUANTITY_STEP_1));
+        add1Button.setOnAction(event -> {
+
+            RecipeController.getInstance().updateFoodQuantity((Food) getTableRow().getItem(),
+                                                              this.model.getRecipe().getFoodMap().get(getTableRow().getItem()) + QUANTITY_STEP_1);
+        });
 
         Button add25Button = new Button("+25");
         add25Button.setTooltip(new Tooltip("Ajouter 25 grammes à cet aliment"));

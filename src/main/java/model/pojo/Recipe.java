@@ -1,14 +1,20 @@
 package model.pojo;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Recipe {
 
     private int recipeId;
-
     private String recipeName;
-
     private Map<Food, Integer> foodMap;
+
+    public Recipe(int recipeId, String recipeName) {
+        super();
+        this.recipeId = recipeId;
+        this.recipeName = recipeName;
+        this.foodMap = new HashMap<>();
+    }
 
     public Recipe(int recipeId, String recipeName, Map<Food, Integer> foodMap) {
         super();

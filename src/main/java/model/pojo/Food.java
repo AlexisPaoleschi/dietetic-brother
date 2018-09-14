@@ -1,29 +1,48 @@
 package model.pojo;
 
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-
 public class Food {
 
-    private final SimpleIntegerProperty foodId = new SimpleIntegerProperty(this, "foodId", -1);
-    private final SimpleStringProperty foodName = new SimpleStringProperty(this, "foodName", "");
+    private Integer foodId;
+    private String foodName;
 
-    private final SimpleDoubleProperty glucideAmountFor100g = new SimpleDoubleProperty(this, "glucideAmountFor100g", 0.0);
-    private final SimpleDoubleProperty lipideAmountFor100g = new SimpleDoubleProperty(this, "lipideAmountFor100g", 0.0);
-    private final SimpleDoubleProperty proteineAmountFor100g = new SimpleDoubleProperty(this, "proteineAmountFor100g", 0.0);
+    private Double glucideAmountFor100g;
+    private Double lipideAmountFor100g;
+    private Double proteineAmountFor100g;
 
-    private final SimpleDoubleProperty glucideAmount = new SimpleDoubleProperty(this, "glucideAmount", 0.0);
-    private final SimpleDoubleProperty lipideAmount = new SimpleDoubleProperty(this, "lipideAmount", 0.0);
-    private final SimpleDoubleProperty proteineAmount = new SimpleDoubleProperty(this, "proteineAmount", 0.0);
+    private Double glucideAmount;
+    private Double lipideAmount;
+    private Double proteineAmount;
 
-    public Food(int foodId, String foodName, double glucideAmountFor100g, double lipideAmountFor100g, double proteineAmountFor100g) {
+    public Food(Integer foodId, String foodName, Double glucideAmountFor100g, Double lipideAmountFor100g, Double proteineAmountFor100g) {
         super();
-        this.foodId.set(foodId);
-        this.foodName.set(foodName);
-        this.glucideAmountFor100g.set(glucideAmountFor100g);
-        this.lipideAmountFor100g.set(lipideAmountFor100g);
-        this.proteineAmountFor100g.set(proteineAmountFor100g);
+        this.foodId = foodId;
+        this.foodName = foodName;
+        this.glucideAmountFor100g = glucideAmountFor100g;
+        this.lipideAmountFor100g = lipideAmountFor100g;
+        this.proteineAmountFor100g = proteineAmountFor100g;
+        this.glucideAmount = 0.0;
+        this.lipideAmount = 0.0;
+        this.proteineAmount = 0.0;
+    }
+
+    public Food(
+        Integer foodId,
+        String foodName,
+        Double glucideAmountFor100g,
+        Double lipideAmountFor100g,
+        Double proteineAmountFor100g,
+        Double glucideAmount,
+        Double lipideAmount,
+        Double proteineAmount) {
+        super();
+        this.foodId = foodId;
+        this.foodName = foodName;
+        this.glucideAmountFor100g = glucideAmountFor100g;
+        this.lipideAmountFor100g = lipideAmountFor100g;
+        this.proteineAmountFor100g = proteineAmountFor100g;
+        this.glucideAmount = glucideAmount;
+        this.lipideAmount = lipideAmount;
+        this.proteineAmount = proteineAmount;
     }
 
     /**
@@ -31,8 +50,8 @@ public class Food {
      *
      * @return the value of foodId
      */
-    public int getFoodId() {
-        return foodId.get();
+    public Integer getFoodId() {
+        return foodId;
     }
 
     /**
@@ -40,8 +59,8 @@ public class Food {
      *
      * @param foodId the value to set
      */
-    public void setFoodId(int foodId) {
-        this.foodId.set(foodId);
+    public void setFoodId(Integer foodId) {
+        this.foodId = foodId;
     }
 
     /**
@@ -50,7 +69,7 @@ public class Food {
      * @return the value of foodName
      */
     public String getFoodName() {
-        return foodName.get();
+        return foodName;
     }
 
     /**
@@ -59,43 +78,61 @@ public class Food {
      * @param foodName the value to set
      */
     public void setFoodName(String foodName) {
-        this.foodName.set(foodName);
+        this.foodName = foodName;
     }
 
-    public double getGlucideAmountFor100g() {
-        return glucideAmountFor100g.get();
-    }
-
-    public SimpleDoubleProperty glucideAmountFor100gProperty() {
+    /**
+     * Gets the value of glucideAmountFor100g.
+     *
+     * @return the value of glucideAmountFor100g
+     */
+    public Double getGlucideAmountFor100g() {
         return glucideAmountFor100g;
     }
 
-    public void setGlucideAmountFor100g(double glucideAmountFor100g) {
-        this.glucideAmountFor100g.set(glucideAmountFor100g);
+    /**
+     * Sets the value of glucideAmountFor100g.
+     *
+     * @param glucideAmountFor100g the value to set
+     */
+    public void setGlucideAmountFor100g(Double glucideAmountFor100g) {
+        this.glucideAmountFor100g = glucideAmountFor100g;
     }
 
-    public double getLipideAmountFor100g() {
-        return lipideAmountFor100g.get();
-    }
-
-    public SimpleDoubleProperty lipideAmountFor100gProperty() {
+    /**
+     * Gets the value of lipideAmountFor100g.
+     *
+     * @return the value of lipideAmountFor100g
+     */
+    public Double getLipideAmountFor100g() {
         return lipideAmountFor100g;
     }
 
-    public void setLipideAmountFor100g(double lipideAmountFor100g) {
-        this.lipideAmountFor100g.set(lipideAmountFor100g);
+    /**
+     * Sets the value of lipideAmountFor100g.
+     *
+     * @param lipideAmountFor100g the value to set
+     */
+    public void setLipideAmountFor100g(Double lipideAmountFor100g) {
+        this.lipideAmountFor100g = lipideAmountFor100g;
     }
 
-    public double getProteineAmountFor100g() {
-        return proteineAmountFor100g.get();
-    }
-
-    public SimpleDoubleProperty proteineAmountFor100gProperty() {
+    /**
+     * Gets the value of proteineAmountFor100g.
+     *
+     * @return the value of proteineAmountFor100g
+     */
+    public Double getProteineAmountFor100g() {
         return proteineAmountFor100g;
     }
 
-    public void setProteineAmountFor100g(double proteineAmountFor100g) {
-        this.proteineAmountFor100g.set(proteineAmountFor100g);
+    /**
+     * Sets the value of proteineAmountFor100g.
+     *
+     * @param proteineAmountFor100g the value to set
+     */
+    public void setProteineAmountFor100g(Double proteineAmountFor100g) {
+        this.proteineAmountFor100g = proteineAmountFor100g;
     }
 
     /**
@@ -103,8 +140,8 @@ public class Food {
      *
      * @return the value of glucideAmount
      */
-    public double getGlucideAmount() {
-        return glucideAmount.get();
+    public Double getGlucideAmount() {
+        return glucideAmount;
     }
 
     /**
@@ -112,8 +149,8 @@ public class Food {
      *
      * @param glucideAmount the value to set
      */
-    public void setGlucideAmount(double glucideAmount) {
-        this.glucideAmount.set(glucideAmount);
+    public void setGlucideAmount(Double glucideAmount) {
+        this.glucideAmount = glucideAmount;
     }
 
     /**
@@ -121,8 +158,8 @@ public class Food {
      *
      * @return the value of lipideAmount
      */
-    public double getLipideAmount() {
-        return lipideAmount.get();
+    public Double getLipideAmount() {
+        return lipideAmount;
     }
 
     /**
@@ -130,8 +167,8 @@ public class Food {
      *
      * @param lipideAmount the value to set
      */
-    public void setLipideAmount(double lipideAmount) {
-        this.lipideAmount.set(lipideAmount);
+    public void setLipideAmount(Double lipideAmount) {
+        this.lipideAmount = lipideAmount;
     }
 
     /**
@@ -139,8 +176,8 @@ public class Food {
      *
      * @return the value of proteineAmount
      */
-    public double getProteineAmount() {
-        return proteineAmount.get();
+    public Double getProteineAmount() {
+        return proteineAmount;
     }
 
     /**
@@ -148,7 +185,8 @@ public class Food {
      *
      * @param proteineAmount the value to set
      */
-    public void setProteineAmount(double proteineAmount) {
-        this.proteineAmount.set(proteineAmount);
+    public void setProteineAmount(Double proteineAmount) {
+        this.proteineAmount = proteineAmount;
     }
+
 }
