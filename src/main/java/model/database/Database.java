@@ -39,21 +39,21 @@ public class Database {
         List<Lipide> lipidesList = session.createQuery("FROM Lipide").list();
         List<Proteine> proteinesList = session.createQuery("FROM Proteine").list();
 
-        for (Glucide g : glucidesList) {
-            int foodId = g.getProductCode();
-            String foodName = g.getAlimentProduct();
-            double gluAmount = Utils.parseStringWithComaToDouble(g.getGlucideAmount());
-            double lipAmount = 0;
-            double proAmount = 0;
-            Food food = new Food(foodId, foodName, gluAmount, lipAmount, proAmount);
-            lipidesList.forEach(l -> {
-                if (l.getProductCode() == foodId) {
-                    food.setLipideAmountFor100g(Utils.parseStringWithComaToDouble(l.getLipideAmount()));
+        for (Glucide glucide : glucidesList) {
+            int foodId = glucide.getProductCode();
+            String foodName = glucide.getAlimentProduct();
+            double glucidesAmount = Utils.parseStringWithComaToDouble(glucide.getGlucideAmount());
+            double lipidesAmount = 0;
+            double proteinesAmount = 0;
+            Food food = new Food(foodId, foodName, glucidesAmount, lipidesAmount, proteinesAmount);
+            lipidesList.forEach(lipide -> {
+                if (lipide.getProductCode() == foodId) {
+                    food.setLipideAmountFor100g(Utils.parseStringWithComaToDouble(lipide.getLipideAmount()));
                 }
             });
-            proteinesList.forEach(p -> {
-                if (p.getProductCode() == foodId) {
-                    food.setProteineAmountFor100g(Utils.parseStringWithComaToDouble(p.getProteineAmount()));
+            proteinesList.forEach(proteine -> {
+                if (proteine.getProductCode() == foodId) {
+                    food.setProteineAmountFor100g(Utils.parseStringWithComaToDouble(proteine.getProteineAmount()));
                 }
             });
             availableFood.add(food);
